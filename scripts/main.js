@@ -16,6 +16,9 @@ import {
   renderMoods,
   renderTodaySummary,
   renderWeeklyDashboard,
+  renderStreaks,
+  renderHistoryList,
+  renderHeatmap
 } from "./ui.js";
 
 // -----------------------------
@@ -64,3 +67,7 @@ function saveAndRender() {
   saveState();
   refreshUI();
 }
+ // NEW: Advanced Dashboard
+  renderStreaks();
+  renderHistoryList();
+  renderHeatmap();

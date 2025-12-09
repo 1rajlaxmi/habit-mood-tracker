@@ -65,3 +65,61 @@ export function renderWeeklyDashboard() {
   document.getElementById("weekly-habit-progress").style.width = percentage + "%";
   document.getElementById("common-mood").textContent = commonMood;
 }
+
+import { getStreaks, getHeatmapData } from "./state.js";
+
+export function renderStreaks() {
+  const { currentStreak, longestStreak } = getStreaks();
+  
+  document.getElementById("current-streak").textContent = currentStreak;
+  document.getElementById("longest-streak").textContent = longestStreak;
+}
+
+export function renderHistoryList() {
+  const container = document.getElementById("history-list");
+  container.innerHTML = "";
+
+  const dates = Object.keys(state.entriesByDate).sort().reverse();
+
+  dates.forEach(date => {
+    const entry = state.entriesByDate[date];
+    const completed = entry.completedHabits.length;
+
+    const div = document.createElement("div");
+    div.className =
+      "flex justify-between bg-slate-700 px-3 py-2 rounded-lg";
+
+    div.innerHTML = `
+      <p>${date}</p>
+      <p>${entry.mood}</p>
+      <p class="font-bold">${completed} ✨</p>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+export function renderHeatmap() {
+  const container = document.getElementById("heatmap");
+  container.innerHTML = "";
+
+  const data = getHeatmapData();
+
+  data.forEach(entry => {
+    const intensity = Math.min(entry.count, 4); // cap color levels
+
+    const colors = [
+      "bg-slate-700",
+      "bg-green-700",
+      "bg-green-600",
+      "bg-green-500",
+      "bg-green-400"
+    ];
+
+    const div = document.createElement("div");
+    div.className = `w-6 h-6 rounded ${colors[intensity]} tooltip`;
+    div.title = `${entry.date}: ${entry.count} habits completed`;
+
+    container.appendChild(div);
+  });
+}

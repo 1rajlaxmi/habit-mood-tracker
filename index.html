@@ -87,6 +87,35 @@
         </div>
       </div>
     </section>
+    <!-- ADVANCED DASHBOARD -->
+<section id="advanced-dashboard" class="bg-slate-800 p-4 rounded-xl space-y-6">
+  <h2 class="text-lg font-semibold">Advanced Dashboard</h2>
+
+  <!-- STREAK COUNTER -->
+  <div>
+    <h3 class="font-semibold mb-2">Streaks</h3>
+    <p>🔥 Current Streak: <span id="current-streak" class="font-bold">0</span> days</p>
+    <p>🏆 Longest Streak: <span id="longest-streak" class="font-bold">0</span> days</p>
+  </div>
+
+  <!-- HISTORY TIMELINE -->
+  <div>
+    <h3 class="font-semibold mb-2">Daily History</h3>
+    <div id="history-list" class="space-y-2 max-h-64 overflow-y-auto pr-2">
+      <!-- Days will render here -->
+    </div>
+  </div>
+
+  <!-- CALENDAR HEATMAP -->
+  <div>
+    <h3 class="font-semibold mb-2">Calendar Heatmap</h3>
+    <div id="heatmap" class="grid grid-cols-7 gap-1">
+      <!-- Squares generated dynamically -->
+    </div>
+  </div>
+
+</section>
+
 
   </div>
 

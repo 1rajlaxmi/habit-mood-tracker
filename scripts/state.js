@@ -79,3 +79,48 @@ export function getWeeklySummary() {
 
   return { percentage, commonMood };
 }
+export function getStreaks() {
+  const dates = Object.keys(state.entriesByDate).sort();
+
+  let currentStreak = 0;
+  let longestStreak = 0;
+
+  let prevDate = null;
+
+  for (const date of dates) {
+    const entry = state.entriesByDate[date];
+    const completed = entry.completedHabits.length > 0;
+
+    if (completed) {
+      if (prevDate) {
+        const diff =
+          (new Date(date) - new Date(prevDate)) / (1000 * 60 * 60 * 24);
+
+        if (diff === 1) {
+          currentStreak++;
+        } else {
+          currentStreak = 1;
+        }
+      } else {
+        currentStreak = 1;
+      }
+
+      longestStreak = Math.max(longestStreak, currentStreak);
+    } else {
+      currentStreak = 0;
+    }
+
+    prevDate = date;
+  }
+
+  return { currentStreak, longestStreak };
+}
+
+export function getHeatmapData() {
+  const entries = state.entriesByDate;
+
+  return Object.entries(entries).map(([date, entry]) => ({
+    date,
+    count: entry.completedHabits.length,
+  }));
+}

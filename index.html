@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Habit & Mood Tracker</title>
+
+  <!-- Compiled Tailwind CSS -->
+  <link rel="stylesheet" href="./styles/styles.css" />
+</head>
+
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4">
+
+  <div id="app" class="w-full max-w-3xl space-y-6">
+
+    <!-- HEADER -->
+    <header class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Habit & Mood Tracker</h1>
+      <p id="current-date" class="text-slate-400 text-sm"></p>
+    </header>
+
+    <!-- ADD HABIT -->
+    <section id="add-habit-section" class="bg-slate-800 p-4 rounded-xl space-y-3">
+      <h2 class="text-lg font-semibold">Add a Habit</h2>
+      
+      <div class="flex items-center gap-2">
+        <input 
+          id="habit-input"
+          type="text"
+          class="flex-1 bg-slate-700 px-3 py-2 rounded-lg outline-none"
+          placeholder="Add your Habit"
+        />
+        <button 
+          id="add-habit-btn"
+          class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+          Add
+        </button>
+      </div>
+    </section>
+
+    <!-- HABIT LIST -->
+    <section id="habit-list-section" class="bg-slate-800 p-4 rounded-xl space-y-3">
+      <h2 class="text-lg font-semibold">Your Habits</h2>
+
+      <div id="habit-list" class="space-y-3">
+        <!-- Habits will be added dynamically -->
+      </div>
+    </section>
+
+    <!-- MOOD SELECTOR -->
+    <section id="mood-section" class="bg-slate-800 p-4 rounded-xl space-y-3">
+      <h2 class="text-lg font-semibold">Your Mood Today</h2>
+
+      <div id="mood-options" class="flex gap-3 text-3xl">
+        <button class="mood-btn">😀</button>
+        <button class="mood-btn">🙂</button>
+        <button class="mood-btn">😐</button>
+        <button class="mood-btn">😒</button>
+        <button class="mood-btn">😭</button>
+      </div>
+    </section>
+
+    <!-- TODAY SUMMARY -->
+    <section id="today-summary" class="bg-slate-800 p-4 rounded-xl space-y-3">
+      <h2 class="text-lg font-semibold">Today's Summary</h2>
+
+      <div class="flex justify-between">
+        <p>Completed Habits: <span id="completed-count" class="font-bold">0</span></p>
+        <p>Mood: <span id="today-mood" class="font-bold">🙂</span></p>
+      </div>
+    </section>
+
+    <!-- WEEKLY Dashboard -->
+    <section id="weekly-dashboard" class="bg-slate-800 p-4 rounded-xl space-y-3">
+      <h2 class="text-lg font-semibold">Weekly Overview</h2>
+
+      <div class="space-y-2">
+        <div>
+          <p class="text-sm text-slate-400">Habit Completion</p>
+          <div class="bg-slate-700 h-3 rounded-lg overflow-hidden">
+            <div id="weekly-habit-progress" class="h-full bg-green-500 w-[0%] transition-all"></div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-sm text-slate-400">Most Common Mood</p>
+          <p id="common-mood" class="text-2xl">🙂</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script type="module" src="./scripts/main.js"></script>
+</body>
+</html>

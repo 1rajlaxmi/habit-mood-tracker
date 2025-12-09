@@ -1,0 +1,10 @@
+{
+  "name": "habit-mood-tracker",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./styles/tailwind.css -o ./styles/styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

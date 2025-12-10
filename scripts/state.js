@@ -124,3 +124,15 @@ export function getHeatmapData() {
     count: entry.completedHabits.length,
   }));
 }
+
+export function deleteHabit(habitId) {
+  // remove from habits list
+  state.habits = state.habits.filter(h => h.id !== habitId);
+
+  // remove from all daily entries
+  for (const date in state.entriesByDate) {
+    const entry = state.entriesByDate[date];
+    entry.completedHabits = entry.completedHabits.filter(id => id !== habitId);
+  }
+}
+

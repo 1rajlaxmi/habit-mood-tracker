@@ -3,14 +3,14 @@ import { state, getTodaySummary, getWeeklySummary } from "./state.js";
 // -----------------------------
 // RENDER HABITS
 // -----------------------------
-export function renderHabitList(onToggle) {
+export function renderHabitList(onToggle, onDelete) {
   const container = document.getElementById("habit-list");
   container.innerHTML = "";
 
   const today = new Date().toISOString().split("T")[0];
   const entry = state.entriesByDate[today] || { completedHabits: [] };
 
-  state.habits.forEach(habit => {
+  state.habits.forEach((habit) => {
     const isDone = entry.completedHabits.includes(habit.id);
 
     const div = document.createElement("div");
@@ -18,13 +18,30 @@ export function renderHabitList(onToggle) {
       "flex items-center justify-between bg-slate-700 px-3 py-2 rounded-lg";
 
     div.innerHTML = `
-      <p>${habit.name}</p>
-      <button class="px-3 py-1 rounded-lg ${isDone ? "bg-green-600" : "bg-blue-600"}">
-        ${isDone ? "Done" : "Mark"}
-      </button>
-    `;
+  <p>${habit.name}</p>
+  
+  <div class="flex items-center gap-2">
+    <button class="mark-btn px-3 py-1 rounded-lg ${
+      isDone ? "bg-green-600" : "bg-blue-600"
+    }">
+      ${isDone ? "Done" : "Mark"}
+    </button>
 
-    div.querySelector("button").addEventListener("click", () => onToggle(habit.id));
+    <button class="delete-btn px-3 py-1 bg-red-600 rounded-lg hover:bg-red-700">
+      ✖
+    </button>
+  </div>
+`;
+
+    // Mark habit event
+    div
+      .querySelector(".mark-btn")
+      .addEventListener("click", () => onToggle(habit.id));
+
+    // Delete habit event
+    div
+      .querySelector(".delete-btn")
+      .addEventListener("click", () => onDelete(habit.id));
 
     container.appendChild(div);
   });
@@ -36,13 +53,12 @@ export function renderHabitList(onToggle) {
 export function renderMoods(selectedMood, onSelect) {
   const buttons = document.querySelectorAll(".mood-btn");
 
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     const mood = btn.textContent.trim();
 
-    btn.className =
-      `mood-btn text-3xl transition p-1 rounded ${
-        mood === selectedMood ? "bg-blue-600" : "bg-slate-700"
-      }`;
+    btn.className = `mood-btn text-3xl transition p-1 rounded ${
+      mood === selectedMood ? "bg-blue-600" : "bg-slate-700"
+    }`;
 
     btn.onclick = () => onSelect(mood);
   });
@@ -53,7 +69,8 @@ export function renderMoods(selectedMood, onSelect) {
 // -----------------------------
 export function renderTodaySummary() {
   const summary = getTodaySummary();
-  document.getElementById("completed-count").textContent = summary.completedCount;
+  document.getElementById("completed-count").textContent =
+    summary.completedCount;
   document.getElementById("today-mood").textContent = summary.mood;
 }
 
@@ -62,7 +79,8 @@ export function renderTodaySummary() {
 // -----------------------------
 export function renderWeeklyDashboard() {
   const { percentage, commonMood } = getWeeklySummary();
-  document.getElementById("weekly-habit-progress").style.width = percentage + "%";
+  document.getElementById("weekly-habit-progress").style.width =
+    percentage + "%";
   document.getElementById("common-mood").textContent = commonMood;
 }
 
@@ -70,7 +88,7 @@ import { getStreaks, getHeatmapData } from "./state.js";
 
 export function renderStreaks() {
   const { currentStreak, longestStreak } = getStreaks();
-  
+
   document.getElementById("current-streak").textContent = currentStreak;
   document.getElementById("longest-streak").textContent = longestStreak;
 }
@@ -81,13 +99,12 @@ export function renderHistoryList() {
 
   const dates = Object.keys(state.entriesByDate).sort().reverse();
 
-  dates.forEach(date => {
+  dates.forEach((date) => {
     const entry = state.entriesByDate[date];
     const completed = entry.completedHabits.length;
 
     const div = document.createElement("div");
-    div.className =
-      "flex justify-between bg-slate-700 px-3 py-2 rounded-lg";
+    div.className = "flex justify-between bg-slate-700 px-3 py-2 rounded-lg";
 
     div.innerHTML = `
       <p>${date}</p>
@@ -105,7 +122,7 @@ export function renderHeatmap() {
 
   const data = getHeatmapData();
 
-  data.forEach(entry => {
+  data.forEach((entry) => {
     const intensity = Math.min(entry.count, 4); // cap color levels
 
     const colors = [
@@ -113,7 +130,7 @@ export function renderHeatmap() {
       "bg-green-700",
       "bg-green-600",
       "bg-green-500",
-      "bg-green-400"
+      "bg-green-400",
     ];
 
     const div = document.createElement("div");

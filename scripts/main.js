@@ -1,6 +1,7 @@
 import {
   state,
   addHabit,
+  deleteHabit,
   toggleHabit,
   setMood,
   getToday,
@@ -46,10 +47,17 @@ document.getElementById("add-habit-btn").onclick = () => {
 // -----------------------------
 function refreshUI() {
   // habits
-  renderHabitList(id => {
+  renderHabitList(
+  id => {
     toggleHabit(id);
     saveAndRender();
-  });
+  },
+  id => {
+    deleteHabit(id);
+    saveAndRender();
+  }
+);
+
 
   // moods
   const today = getToday();

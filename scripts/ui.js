@@ -54,11 +54,12 @@ export function renderMoods(selectedMood, onSelect) {
   const buttons = document.querySelectorAll(".mood-btn");
 
   buttons.forEach((btn) => {
-    const mood = btn.textContent.trim();
+   const mood = btn.querySelector("img").src;
 
-    btn.className = `mood-btn text-3xl transition p-1 rounded ${
-      mood === selectedMood ? "bg-blue-600" : "bg-slate-700"
-    }`;
+   btn.className =
+  `mood-btn mood-hover text-3xl p-1 rounded ${
+    mood === selectedMood ? "bg-blue-600 mood-selected" : "bg-slate-700"
+  }`;
 
     btn.onclick = () => onSelect(mood);
   });
@@ -71,7 +72,12 @@ export function renderTodaySummary() {
   const summary = getTodaySummary();
   document.getElementById("completed-count").textContent =
     summary.completedCount;
-  document.getElementById("today-mood").textContent = summary.mood;
+  document.getElementById("today-mood").innerHTML =
+  summary.mood
+    ? `<img src="${summary.mood}" class="w-7 h-7 inline-block">`
+    : `<span class="text-slate-500">No mood</span>`;
+
+
 }
 
 // -----------------------------
@@ -81,7 +87,12 @@ export function renderWeeklyDashboard() {
   const { percentage, commonMood } = getWeeklySummary();
   document.getElementById("weekly-habit-progress").style.width =
     percentage + "%";
-  document.getElementById("common-mood").textContent = commonMood;
+  document.getElementById("common-mood").innerHTML =
+  commonMood
+    ? `<img src="${commonMood}" class="w-8 h-8 inline-block">`
+    : `<span class="text-slate-500">--</span>`;
+
+
 }
 
 import { getStreaks, getHeatmapData } from "./state.js";
@@ -108,7 +119,8 @@ export function renderHistoryList() {
 
     div.innerHTML = `
       <p>${date}</p>
-      <p>${entry.mood}</p>
+      <p><img src="${entry.mood}" class="w-6 h-6"></p>
+
       <p class="font-bold">${completed} ✨</p>
     `;
 
@@ -135,7 +147,8 @@ export function renderHeatmap() {
 
     const div = document.createElement("div");
     div.className = `w-6 h-6 rounded ${colors[intensity]} tooltip`;
-    div.title = `${entry.date}: ${entry.count} habits completed`;
+   const moodName = entry.mood.split("/").pop().replace(".svg", "");
+div.title = `${entry.date} — ${moodName} — ${entry.count} habits`;
 
     container.appendChild(div);
   });

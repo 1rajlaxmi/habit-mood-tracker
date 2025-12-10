@@ -51,11 +51,24 @@
       <h2 class="text-lg font-semibold">Your Mood Today</h2>
 
       <div id="mood-options" class="flex gap-3 text-3xl">
-        <button class="mood-btn">😀</button>
-        <button class="mood-btn">🙂</button>
-        <button class="mood-btn">😐</button>
-        <button class="mood-btn">😒</button>
-        <button class="mood-btn">😭</button>
+        <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/happy-face-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
+        <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/angry-face-with-horns-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
+        <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/boring-work-boring-lazy-bored-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
+        <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/neutral-face-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
+       <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/not-good-2-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
+         <button class="mood-btn mood-hover p-1 rounded">
+          <img src="./assets/icons/sad-face-svgrepo-com.svg" class="w-10 h-10" />
+        </button>
       </div>
     </section>
 
@@ -65,7 +78,7 @@
 
       <div class="flex justify-between">
         <p>Completed Habits: <span id="completed-count" class="font-bold">0</span></p>
-        <p>Mood: <span id="today-mood" class="font-bold">🙂</span></p>
+        <p>Mood: <span id="today-mood" class="font-bold"></span></p>
       </div>
     </section>
 
@@ -83,7 +96,7 @@
 
         <div>
           <p class="text-sm text-slate-400">Most Common Mood</p>
-          <p id="common-mood" class="text-2xl">🙂</p>
+          <p id="common-mood" class="text-2xl"></p>
         </div>
       </div>
     </section>

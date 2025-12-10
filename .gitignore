@@ -2,7 +2,7 @@
 node_modules/
 
 # Build files
-styles/styles.css
+
 
 # System files
 .DS_Store

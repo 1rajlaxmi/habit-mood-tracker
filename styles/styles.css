@@ -909,3 +909,24 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
+
+/* Mood hover animation */
+.mood-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mood-hover:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.6); /* blue glow */
+}
+
+/* Selected mood pulse animation */
+@keyframes moodPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.10); }
+  100% { transform: scale(1); }
+}
+
+.mood-selected {
+  animation: moodPulse 0.6s ease-out;
+}
